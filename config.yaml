@@ -1,0 +1,48 @@
+name: Homebox
+slug: homebox
+description: Homebox als Home Assistant Add-on (konfigurierbar via UI)
+icon: https://raw.githubusercontent.com/sysadminsmedia/homebox/main/docs/public/lilbox.svg
+version: "1.0.0"
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+ingress: false
+panel_icon: mdi:archive
+
+# Homebox läuft intern auf 7745, wir mappen auf 3100 wie bei dir
+ports:
+  7745/tcp: 3100
+ports_description:
+  7745/tcp: Homebox Web UI (extern 3100)
+
+# /data ist Add-on persistent (Storage des Add-ons)
+# optional, aber praktisch:
+map:
+  - addon_config:rw
+
+options:
+  log_level: info
+  log_format: text
+  allow_analytics: false
+  web_max_upload_size: 10
+  label_maker_font_size: 24
+  label_maker_height: 96
+  label_maker_margin: 5
+  label_maker_padding: 5
+  label_maker_width: 320
+  label_maker_print_command: "cp {{.FileName}} /data/labels/label.png"
+
+schema:
+  log_level: list(trace|debug|info|warning|error)
+  log_format: list(text|json)
+  allow_analytics: bool
+  web_max_upload_size: int
+  label_maker_font_size: int
+  label_maker_height: int
+  label_maker_margin: int
+  label_maker_padding: int
+  label_maker_width: int
+  label_maker_print_command: str
