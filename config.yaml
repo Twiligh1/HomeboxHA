@@ -2,15 +2,20 @@ name: Homebox
 slug: homebox
 description: Homebox als Home Assistant Add-on (konfigurierbar via UI)
 icon: https://raw.githubusercontent.com/sysadminsmedia/homebox/main/docs/public/lilbox.svg
-version: "1.0.0"
+version: "1.0.1"
 arch:
   - amd64
   - aarch64
   - armv7
 startup: services
 boot: auto
-ingress: false
+
+ingress: true
+ingress_port: 7745
 panel_icon: mdi:archive
+panel_title: Homebox
+
+webui: http://[HOST]:[PORT:3100]
 
 # Homebox läuft intern auf 7745, wir mappen auf 3100 wie bei dir
 ports:
